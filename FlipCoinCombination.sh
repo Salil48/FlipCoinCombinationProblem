@@ -154,29 +154,79 @@ double[fourth_per]=$(echo $total_fourth_comb $FLIP | awk '{print $1/$2}')
 echo "Percentage of TT Combination ="${double[fourth_per]}
 
 echo "-----------------------------------------"
-echo -n "Triplet Combination" ${triplet[first_combination]} ${triplet[second_combination]} ${triplet[third_combination]} ${triplet[fourth_combination]} 
+echo -n "Triplet Combination" ${triplet[first_combination]} ${triplet[second_combination]} ${triplet[third_combination]} ${triplet[fourth_combination]}
 echo " "${triplet[fifth_combination]} ${triplet[sixth_combination]} ${triplet[seventh_combination]} ${triplet[eigth_combination]}
 
-triplet[first_per]=$(echo $total_triplet_first_comb $FLIP | awk '{print $1/$2}') 
+triplet[first_per]=$(echo $total_triplet_first_comb $FLIP | awk '{print $1/$2}')
 echo "Percentage of" ${triplet[first_combination]} "Combination ="${triplet[first_per]}
 
-triplet[second_per]=$(echo $total_triplet_second_comb $FLIP | awk '{print $1/$2}')  
-echo "Percentage of" ${triplet[second_combination]} "Combination ="${triplet[second_per]} 
+triplet[second_per]=$(echo $total_triplet_second_comb $FLIP | awk '{print $1/$2}')
+echo "Percentage of" ${triplet[second_combination]} "Combination ="${triplet[second_per]}
 
-triplet[third_per]=$(echo $total_triplet_third_comb $FLIP | awk '{print $1/$2}')  
+triplet[third_per]=$(echo $total_triplet_third_comb $FLIP | awk '{print $1/$2}')
 echo "Percentage of" ${triplet[third_combination]} "Combination ="${triplet[third_per]}
 
-triplet[fourth_per]=$(echo $total_triplet_fourth_comb $FLIP | awk '{print $1/$2}')  
+triplet[fourth_per]=$(echo $total_triplet_fourth_comb $FLIP | awk '{print $1/$2}')
 echo "Percentage of" ${triplet[fourth_combination]} "Combination ="${triplet[fourth_per]}
 
-triplet[fifth_per]=$(echo $total_triplet_fifth_comb $FLIP | awk '{print $1/$2}')  
-echo "Percentage of" ${triplet[fifth_combination]} "Combination ="${triplet[fifth_per]} 
+triplet[fifth_per]=$(echo $total_triplet_fifth_comb $FLIP | awk '{print $1/$2}')
+echo "Percentage of" ${triplet[fifth_combination]} "Combination ="${triplet[fifth_per]}
 
-triplet[sixth_per]=$(echo $total_triplet_sixth_comb $FLIP | awk '{print $1/$2}')  
+triplet[sixth_per]=$(echo $total_triplet_sixth_comb $FLIP | awk '{print $1/$2}')
 echo "Percentage of" ${triplet[sixth_combination]} "Combination ="${triplet[sixth_per]}
 
-triplet[seventh_per]=$(echo $total_triplet_seventh_comb $FLIP | awk '{print $1/$2}')  
+triplet[seventh_per]=$(echo $total_triplet_seventh_comb $FLIP | awk '{print $1/$2}')
 echo "Percentage of" ${triplet[seventh_combination]} "Combination ="${triplet[seventh_per]}
 
-triplet[eigth_per]=$(echo $total_triplet_eigth_comb $FLIP | awk '{print $1/$2}')  
-echo "Percentage of" ${triplet[eigth_combination]} "Combination ="${triplet[eigth_per]}  
+triplet[eigth_per]=$(echo $total_triplet_eigth_comb $FLIP | awk '{print $1/$2}')
+echo "Percentage of" ${triplet[eigth_combination]} "Combination ="${triplet[eigth_per]}
+
+
+arr[((index++))]=${singlet[h_per]}
+arr[((index++))]=${singlet[t_per]}
+arr[((index++))]=${double[first_per]}
+arr[((index++))]=${double[second_per]}
+arr[((index++))]=${double[third_per]}
+arr[((index++))]=${double[fourth_per]}
+arr[((index++))]=${triplet[first_per]}
+arr[((index++))]=${triplet[second_per]}
+arr[((index++))]=${triplet[third_per]}
+arr[((index++))]=${triplet[fourth_per]}
+arr[((index++))]=${triplet[fifth_per]}
+arr[((index++))]=${triplet[sixth_per]}
+arr[((index++))]=${triplet[seventh_per]}
+arr[((index))]=${triplet[eigth_per]}
+echo ${arr[@]}
+echo ${#arr[@]}
+len=$((${#arr[@]}))
+for(( i=0; i<13; i++ ))
+do
+	for (( j=i+1; j<13; j++ ))
+	do
+		if [ $(echo "${arr[i]}<${arr[j]}"|bc) -eq 1 ]
+		then
+			temp=${arr[i]}
+			arr[i]=${arr[j]}
+			arr[j]=$temp
+		fi
+	done
+done
+echo ${arr[@]}
+max=${arr[0]}
+
+case $max in
+	${singlet[h_per]}) echo "Singlet Combination is Winner" ;;
+	${singlet[t_per]}) echo "Singlet Combination is Winner" ;;
+	${double[first_per]}) echo "Doublet Combination is Winner" ;;
+	${double[second_per]}) echo "Doublet Combination is Winner" ;;
+	${double[third_per]}) echo "Doublet Combination is Winner" ;;
+	${double[fourth_per]}) echo "Doublet Combination is Winner"  ;;
+	${triplet[first_per]}) echo "Triplet Combination is Winner"  ;;
+	${triplet[second_per]}) echo "Triplet Combination is Winner" ;;
+	${triplet[third_per]}) echo "Triplet Combination is Winner" ;;
+	${triplet[fourth_per]}) echo "Triplet Combination is Winner" ;;
+	${triplet[fifth_per]}) echo "Triplet Combination is Winner" ;;
+	${triplet[sixth_per]}) echo "Triplet Combination is Winner" ;;
+	${triplet[seventh_per]}) echo "Triplet Combination is Winner" ;;
+	${triplet[eigth_per]}) echo "Triplet Combination is Winner" ;;
+esac
