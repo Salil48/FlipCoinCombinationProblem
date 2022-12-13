@@ -1,19 +1,31 @@
 echo "Welcome to Flip Coin Combination Problem"
 
-declare -A r2
+declare -A r3
 for ((i=0; i<100; i++))
 do
-r2=$((RANDOM%4))
-if [[ $r2 -eq 0 ]]
+r3=$((RANDOM%8))
+if [[ $r3 -eq 0 ]]
 then
-echo "HH"
-elif [[ $r2 -eq 1 ]]
+echo "HHH"
+elif [[ $r3 -eq 1 ]]
 then
-echo "HT"
-elif [[ $r2 -eq 2 ]]
+echo "HHT"
+elif [[ $r3 -eq 2 ]]
 then
-echo "TH"
+echo "HTH"
+elif [[ $r3 -eq 3 ]]
+then
+echo "THH"
+elif [[ $r3 -eq 4 ]]
+then
+echo "TTH"
+elif [[ $r3 -eq 5 ]]
+then
+echo "THT"
+elif [[ $r3 -eq 6 ]]
+then
+echo "HTT"
 else
-echo "TT"
+echo "TTT"
 fi
 done
