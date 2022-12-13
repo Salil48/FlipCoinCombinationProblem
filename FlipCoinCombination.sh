@@ -1,13 +1,19 @@
 echo "Welcome to Flip Coin Combination Problem"
 
-declare -A r
+declare -A r2
 for ((i=0; i<100; i++))
 do
-r=$((RANDOM%2))
-if [[ $r -eq 0 ]]
+r2=$((RANDOM%4))
+if [[ $r2 -eq 0 ]]
 then
-echo "Head"
+echo "HH"
+elif [[ $r2 -eq 1 ]]
+then
+echo "HT"
+elif [[ $r2 -eq 2 ]]
+then
+echo "TH"
 else
-echo "Tail"
+echo "TT"
 fi
 done
